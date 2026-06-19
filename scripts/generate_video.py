@@ -1,5 +1,4 @@
-import edge_tts
-import asyncio
+from gtts import gTTS
 import subprocess
 import os
 
@@ -36,10 +35,9 @@ SCRIPTS = [
     ("Final Rest", "This is your time now... no phone... no worries... no tomorrow... just you and this moment of peace... you have earned this rest... take it fully... breathe slowly... close your eyes... and sleep..."),
 ]
 
-async def generate_audio(text, filename):
-    voice = "en-US-AriaNeural"
-    communicate = edge_tts.Communicate(text, voice, rate="-25%", volume="+0%")
-    await communicate.save(filename)
+def generate_audio(text, filename):
+    tts = gTTS(text=text, lang='en', slow=True)
+    tts.save(filename)
 
 def create_video(audio_file, animation_file, output_file):
     subprocess.run([
@@ -58,6 +56,6 @@ day = int(os.environ.get("DAY_OFFSET", 0)) % len(SCRIPTS)
 title, script = SCRIPTS[day]
 
 print(f"Generating: {title}")
-asyncio.run(generate_audio(script, "audio.mp3"))
+generate_audio(script, "audio.mp3")
 create_video("audio.mp3", "animations/rain_loop.mp4", "output.mp4")
 print(f"Done! Video ready: {title}")
