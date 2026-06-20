@@ -3,44 +3,44 @@ import google.oauth2.credentials
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 
-SCRIPTS_TITLES = [
-    "Deep Sleep Meditation 😴 | Calm Your Mind Tonight",
-    "Rain Sound Relaxation 🌧️ | Fall Asleep Fast",
-    "Body Scan Sleep Meditation 🌙 | Release All Tension",
-    "Midnight Calm Meditation ✨ | Peaceful Sleep Music",
-    "Forest Sleep Journey 🌲 | Nature Sleep Meditation",
-    "Ocean Wave Sleep 🌊 | Deep Relaxation Tonight",
-    "Anxiety Release Meditation 💆 | Sleep Without Worry",
-    "Gratitude Sleep Meditation 🙏 | Peaceful Night Rest",
-    "Healing Sleep Meditation 💫 | Restore Your Body Tonight",
-    "White Light Relaxation 🤍 | Deep Sleep Meditation",
-    "Stress Release Sleep 🌿 | Let Go and Rest Tonight",
-    "Mindful Breathing Sleep 🧘 | 4-4-4 Breathing Technique",
-    "Peaceful Night Meditation 🌃 | Calm Sleep Music",
-    "Cloud Visualization Sleep ☁️ | Float Into Deep Rest",
-    "Mountain Peace Meditation 🏔️ | Calm Lake Sleep Music",
-    "Moonlight Sleep Meditation 🌕 | Healing Night Energy",
-    "Inner Peace Journey 🕊️ | Deep Relaxation Sleep",
-    "Tension Release Meditation 💤 | Full Body Relaxation",
-    "Positive Dreams Meditation 🌈 | Beautiful Sleep Tonight",
-    "Energy Reset Sleep 🔋 | Recharge Your Body Tonight",
-    "Letting Go Sleep Meditation 🍃 | Release and Rest",
-    "Deep Rest Meditation 🌑 | Sleep Mode Activated",
-    "Comfort Sleep Meditation 🛏️ | Most Relaxing Sleep Aid",
-    "Night Sky Meditation ⭐ | Count Stars to Sleep",
-    "Gentle Wind Sleep 🌬️ | Carry Stress Away Tonight",
-    "Garden of Rest Meditation 🌸 | Peaceful Night Garden",
-    "Sound of Silence Meditation 🤫 | Deep Peaceful Sleep",
-    "Waterfall Calm Meditation 💧 | Constant Sound for Sleep",
-    "Starlight Sleep Meditation 🌟 | Healing Energy Tonight",
-    "Final Rest Meditation 🌙 | Your Time to Sleep Now",
+VIDEOS = [
+    "Deep Sleep Music 😴 | Rain Sounds | 1 Hour",
+    "Relaxing Sleep Music 🌧️ | Stress Relief | 1 Hour",
+    "Peaceful Sleep Music 🌙 | Calm Your Mind | 1 Hour",
+    "Sleep Instantly 💤 | Rain & Music | 1 Hour",
+    "Deep Relaxation Music ✨ | Fall Asleep Fast | 1 Hour",
+    "Healing Sleep Music 💫 | Nature Sounds | 1 Hour",
+    "Calm Mind Music 🌿 | Rain Sounds | 1 Hour",
+    "Anxiety Relief Music 💆 | Peaceful Sleep | 1 Hour",
+    "Beautiful Sleep Music 🌸 | Relaxing Sounds | 1 Hour",
+    "Night Meditation Music 🌃 | Deep Sleep | 1 Hour",
+    "Stress Relief Music 🍃 | Rain Sounds | 1 Hour",
+    "Gentle Sleep Music ☁️ | Calm Night | 1 Hour",
+    "Ocean Sleep Music 🌊 | Deep Relaxation | 1 Hour",
+    "Forest Sleep Music 🌲 | Nature Sounds | 1 Hour",
+    "Moonlight Sleep Music 🌕 | Peaceful Night | 1 Hour",
+    "Starlight Sleep Music ⭐ | Calm Music | 1 Hour",
+    "Waterfall Sleep Music 💧 | Stress Relief | 1 Hour",
+    "Midnight Calm Music 🌑 | Deep Sleep | 1 Hour",
+    "Inner Peace Music 🕊️ | Sleep Sounds | 1 Hour",
+    "Positive Energy Music 🌈 | Relaxing Night | 1 Hour",
+    "Mountain Sleep Music 🏔️ | Nature Sounds | 1 Hour",
+    "Garden Sleep Music 🌺 | Peaceful Music | 1 Hour",
+    "Wind Sleep Music 🌬️ | Calm Sounds | 1 Hour",
+    "White Noise Sleep 🤍 | Deep Rest | 1 Hour",
+    "Thunder Sleep Music ⛈️ | Rain Sounds | 1 Hour",
+    "Bamboo Forest Music 🎋 | Asian Calm | 1 Hour",
+    "Crystal Bowl Music 🔮 | Healing Sounds | 1 Hour",
+    "Piano Sleep Music 🎹 | Soft Music | 1 Hour",
+    "Guitar Sleep Music 🎸 | Relaxing Night | 1 Hour",
+    "Flute Sleep Music 🎵 | Peaceful Sleep | 1 Hour",
 ]
 
 TAGS = [
-    "sleep meditation", "relaxation", "calm music",
-    "deep sleep", "meditation", "sleep aid",
-    "stress relief", "anxiety relief", "peaceful sleep",
-    "sleep sounds", "bedtime meditation"
+    "sleep music", "relaxing music", "calm music",
+    "deep sleep", "meditation music", "sleep aid",
+    "stress relief", "anxiety relief", "peaceful music",
+    "rain sounds", "nature sounds", "sleep sounds"
 ]
 
 def get_youtube_service():
@@ -53,13 +53,25 @@ def get_youtube_service():
     )
     return build("youtube", "v3", credentials=creds)
 
-def upload_video(youtube, video_file, title, description, tags):
+def upload_video(youtube, video_file, title):
+    description = f"""{title}
+
+Welcome to Nature's Hush — your daily sanctuary for deep sleep and relaxation.
+
+🌧️ Perfect for sleep, study, and relaxation
+💤 Helps with insomnia and anxiety
+🎧 Best experienced with headphones or speaker
+🔔 Subscribe for daily sleep music
+
+#{title.split()[0]}Sleep #DeepSleep #RelaxingMusic #SleepMusic #CalmMusic #RainSounds #NatureSounds #Meditation #StressRelief #AnxietyRelief
+"""
+
     body = {
         "snippet": {
             "title": title,
             "description": description,
-            "tags": tags,
-            "categoryId": "22",
+            "tags": TAGS,
+            "categoryId": "10",
             "defaultLanguage": "en"
         },
         "status": {
@@ -71,7 +83,8 @@ def upload_video(youtube, video_file, title, description, tags):
     media = MediaFileUpload(
         video_file,
         mimetype="video/mp4",
-        resumable=True
+        resumable=True,
+        chunksize=1024*1024*5
     )
 
     request = youtube.videos().insert(
@@ -81,24 +94,12 @@ def upload_video(youtube, video_file, title, description, tags):
     )
 
     response = request.execute()
-    print(f"Uploaded! Video ID: {response['id']}")
+    print(f"✅ Uploaded! Video ID: {response['id']}")
+    print(f"✅ Title: {title}")
     return response['id']
 
-day = int(os.environ.get("DAY_OFFSET", 0)) % len(SCRIPTS_TITLES)
-title = SCRIPTS_TITLES[day]
-
-description = f"""{title}
-
-Welcome to Sleep & Calm — your daily meditation channel for deep sleep and relaxation.
-
-🌙 Listen every night before bed
-💤 Perfect for insomnia and anxiety
-🎧 Best with headphones or speaker
-
-#SleepMeditation #DeepSleep #Relaxation #CalmMusic #MeditationForSleep
-
-Subscribe for daily sleep meditations 🔔
-"""
+day = int(os.environ.get("DAY_OFFSET", 0)) % len(VIDEOS)
+title = VIDEOS[day]
 
 youtube = get_youtube_service()
-upload_video(youtube, "output.mp4", title, description, TAGS)
+upload_video(youtube, "output.mp4", title)
