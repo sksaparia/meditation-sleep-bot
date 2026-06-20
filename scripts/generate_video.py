@@ -3,16 +3,59 @@ import subprocess
 import os
 
 SCRIPTS = [
-    ("Deep Sleep Meditation", """
-Welcome to Sleep and Calm. Find a comfortable position and close your eyes.
-Take a deep breath in... and slowly breathe out... let your body become heavy...
-feel every muscle relaxing... you are safe... you are calm...
-The day is over now. You have done enough. You are enough.
-Let your shoulders drop... unclench your jaw... soften your hands...
-With every breath you take... you sink deeper into relaxation...
-deeper... and deeper... into peaceful sleep.
-Goodnight, and sleep well.
-"""),
+    (("Deep Sleep Meditation", """
+Welcome to Sleep and Calm. 
+Tonight, you are giving yourself the greatest gift you can give... the gift of rest.
+Find a comfortable position. Let your body sink into the surface beneath you.
+Close your eyes gently. There is nowhere to be. Nothing to do. No one to answer to.
+Just this moment. Just this breath.
+
+Take a slow deep breath in through your nose... hold it gently... and release slowly through your mouth.
+Again... breathe in... and out... feel your body becoming heavier with each breath.
+Your feet are relaxing... your ankles... your calves... all tension leaving now.
+Your knees soften... your thighs release... your hips drop and open.
+Your lower back flattens and relaxes... your stomach rises and falls with each peaceful breath.
+Your chest opens... your shoulders drop away from your ears...
+your arms are heavy... your hands are open and soft.
+Your neck releases all tension... your jaw unclenches... your tongue rests at the bottom of your mouth.
+Your eyes are still behind their lids... your forehead is smooth and calm.
+Your entire body is now completely relaxed.
+
+Now imagine yourself lying in a field of soft green grass on a warm summer night.
+The sky above you is a deep dark blue, scattered with thousands of tiny stars.
+A gentle warm breeze moves across your skin, carrying the scent of flowers and fresh earth.
+You can hear crickets singing softly in the distance.
+You feel completely safe here. Completely at peace. Completely free.
+
+With each breath you take, you sink deeper into this peaceful place.
+Deeper into relaxation. Deeper into calm. Deeper into sleep.
+Your thoughts begin to slow down... like clouds drifting lazily across the night sky...
+each thought appears for a moment... and then floats away... gently... effortlessly.
+You do not need to hold onto any thought tonight. Just let them pass.
+
+The stars above you seem to pulse gently with a soft white light.
+This light begins to fall down upon you like the softest rain you have ever felt.
+It touches your forehead first... filling you with peace...
+it moves down through your face... your neck... your shoulders...
+carrying away any remaining tension... any worry... any stress.
+The light fills your chest with warmth... your stomach with calm...
+your legs with heaviness... your feet with stillness.
+You are now completely filled with this peaceful healing light.
+
+Your breathing has slowed to a deep and natural rhythm.
+In... and out... in... and out...
+each breath taking you deeper and deeper into the most restful sleep you have ever known.
+Your body is healing with every breath. Your mind is clearing with every exhale.
+Tomorrow you will wake feeling refreshed, renewed, and ready for whatever comes.
+But for now... there is only this moment... this breath... this beautiful peaceful darkness.
+
+You are safe. You are loved. You are exactly where you need to be.
+Let go of everything now. The night will take care of you.
+Drift deeper... and deeper... and deeper still...
+into perfect, healing, beautiful sleep.
+
+Goodnight. Sleep well. You deserve this rest.
+"""),),
     ("Rain Sound Relaxation", """
 Welcome to Sleep and Calm. Make yourself comfortable and gently close your eyes.
 Listen to the gentle rain falling softly outside...
