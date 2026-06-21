@@ -24,6 +24,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Download Assets
+        env:
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+        run: python scripts/download_assets.py
+
       - name: Generate Video
         env:
           DAY_OFFSET: ${{ github.run_number }}
