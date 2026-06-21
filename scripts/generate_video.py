@@ -1,5 +1,7 @@
 import subprocess
 import os
+import random
+import glob
 
 VIDEOS = [
     "Deep Sleep Music 😴 | Rain Sounds | 1 Hour",
@@ -34,6 +36,12 @@ VIDEOS = [
     "Flute Sleep Music 🎵 | Peaceful Sleep | 1 Hour",
 ]
 
+def get_random_file(folder, extension):
+    files = glob.glob(f"{folder}/*.{extension}")
+    if files:
+        return random.choice(files)
+    return None
+
 def create_video(animation_file, music_file, output_file, duration=3600):
     subprocess.run([
         "ffmpeg",
@@ -50,11 +58,19 @@ def create_video(animation_file, music_file, output_file, duration=3600):
 day = int(os.environ.get("DAY_OFFSET", 0)) % len(VIDEOS)
 title = VIDEOS[day]
 
+# Random animation aur music select karo
+animation = get_random_file("animations/videos", "mp4")
+music = get_random_file("animations/music", "mp3")
+
+# Fallback
+if not animation:
+    animation = "animations/rain_loop.mp4"
+if not music:
+    music = "animations/music.mp3"
+
 print(f"Creating: {title}")
-create_video(
-    "animations/rain_loop.mp4",
-    "animations/music.mp3",
-    "output.mp4",
-    duration=3600
-)
+print(f"Animation: {animation}")
+print(f"Music: {music}")
+
+create_video(animation, music, "output.mp4", duration=3600)
 print(f"Done! Video ready: {title}")
